@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "CK_WEB";
+}
+<style>
+    h2 {
+        text-align: center;
+        color :red
+    }
+    body {
+        background: black;
+        color: white;
+    }
+
+    td, table {
+        border: 1px solid green;
+    }
+
+    table {
+        text-align: center;
+        width:100%
+    }
+</style>
+
+<h2>THỊ TRƯỜNG CHỨNG KHOÁN</h2>
+
+@Html.Hidden("Get", Url.Action("Get", "CK_WEB"))
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td rowspan="2">Mã CK</td>
+            <td colspan="6">Bên Mua</td>
+            <td colspan="2">Khớp Lệnh</td>
+            <td colspan="6">Bên Bán</td>
+            <td rowspan="2">Tổng Khối Lượng</td>
+        </tr>
+        <tr>
+            <td>Giá 3</td>
+            <td>KL 3</td>
+            <td>Giá 2</td>
+            <td>KL 2</td>
+            <td>Giá 1</td>
+            <td>KL 1</td>
+            <td>Giá</td>
+            <td>KL</td>
+            <td>Giá 1</td>
+            <td>KL 1</td>
+            <td>Giá 2</td>
+            <td>KL 2</td>
+            <td>Giá 3</td>
+            <td>KL 3</td>
+        </tr>
+    </thead>
+
+    <tbody id="tblInfo">
+        
+    </tbody>
+</table>

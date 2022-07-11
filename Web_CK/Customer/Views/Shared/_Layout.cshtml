@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            // Proxy created on the fly
+            var cus = $.connection.cusHub;
+
+            // Declare a function on the job hub so the server can invoke it
+            cus.client.displayCK_WEB = function () {
+                getData();
+            };
+
+            // Start the connection
+            $.connection.hub.start();
+            getData();
+        });
+
+        function getData()
+        {
+            var $tbl = $('#tblInfo');
+            $.ajax({
+                url: $("#Get").val(),
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    $tbl.empty();
+
+                    $.each(data.listCus, function (i, model) {
+                        $tbl.append
+                        (
+                            '<tr>' +
+                            '<td>' + model.MACP + '</td>' +
+                            '<td>' + model.GIA_M_BA + '</td>' +
+                            '<td>' + model.KL_M_BA + '</td>' +
+                            '<td>' + model.GIA_M_HAI + '</td>' +
+                            '<td>' + model.KL_M_HAI + '</td>' +
+                            '<td>' + model.GIA_M_MOT + '</td>' +
+                            '<td>' + model.KL_M_MOT + '</td>' +
+                            '<td>' + model.GIA_KHOP_MOI + '</td>' +
+                            '<td>' + model.KL_KHOP_MOI + '</td>' +
+                            '<td>' + model.GIA_B_MOT + '</td>' +
+                            '<td>' + model.KL_B_MOT + '</td>' +
+                            '<td>' + model.GIA_B_HAI + '</td>' +
+                            '<td>' + model.KL_B_HAI + '</td>' +
+                            '<td>' + model.GIA_B_BA + '</td>' +
+                            '<td>' + model.KL_B_BA + '</td>' +
+                            '<td>' + model.TONG_KL_KHOP + '</td>' +
+                            '<tr>'
+                        );
+                    });
+                }
+            });
+        }
+
+    </script>
+
+</body>
+</html>
